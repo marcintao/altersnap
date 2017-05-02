@@ -26,7 +26,6 @@ import (
 	"io/ioutil"
 	"net"
 	"os"
-	"path"
 	"path/filepath"
 	"strings"
 	"sync"
@@ -392,7 +391,7 @@ func (p *pluginControl) Start() error {
 						}).Warn("Auto-loading of plugin '", fileName, "' skipped (plugin not executable)")
 						continue
 					}
-					rp, err := core.NewRequestedPlugin(path.Join(fullPath, fileName), p.GetTempDir(), nil)
+					rp, err := core.NewRequestedPlugin(filepath.Join(fullPath, fileName), p.GetTempDir(), nil)
 					if err != nil {
 						controlLogger.WithFields(log.Fields{
 							"_block":           "start",
@@ -401,8 +400,8 @@ func (p *pluginControl) Start() error {
 						}).Error(err)
 					}
 					signatureFile := fileName + ".asc"
-					if _, err := os.Stat(path.Join(fullPath, signatureFile)); err == nil {
-						err = rp.ReadSignatureFile(path.Join(fullPath, signatureFile))
+					if _, err := os.Stat(filepath.Join(fullPath, signatureFile)); err == nil {
+						err = rp.ReadSignatureFile(filepath.Join(fullPath, signatureFile))
 						if err != nil {
 							controlLogger.WithFields(log.Fields{
 								"_block":           "start",
@@ -597,7 +596,7 @@ func (p *pluginControl) returnPluginDetails(rp *core.RequestedPlugin) (*pluginDe
 		if err != nil {
 			return nil, serror.New(err)
 		}
-		details.ExecPath = path.Join(tempPath, "rootfs")
+		details.ExecPath = filepath.Join(tempPath, "rootfs")
 		if details.Manifest, err = aci.Manifest(f); err != nil {
 			return nil, serror.New(err)
 		}

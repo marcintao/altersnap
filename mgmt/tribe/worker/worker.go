@@ -27,7 +27,7 @@ import (
 	"math/rand"
 	"net"
 	"os"
-	"path"
+	"path/filepath"
 	"sync"
 	"time"
 
@@ -375,7 +375,7 @@ func (w worker) downloadPlugin(c *client.Client, plugin core.Plugin) (*os.File, 
 			logger.Error(err)
 			return nil, err
 		}
-		fpath := path.Join(dir, fmt.Sprintf("%s-%s-%d", plugin.TypeName(), plugin.Name(), plugin.Version()))
+		fpath := filepath.Join(dir, fmt.Sprintf("%s-%s-%d", plugin.TypeName(), plugin.Name(), plugin.Version()))
 		f, err := os.OpenFile(fpath, os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0700)
 		if err != nil {
 			logger.Error(err)

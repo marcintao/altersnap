@@ -23,7 +23,7 @@ import (
 	"errors"
 	"fmt"
 	"os"
-	"path"
+	"path/filepath"
 	"time"
 
 	log "github.com/Sirupsen/logrus"
@@ -315,17 +315,17 @@ func (r *runner) runPlugin(name string, details *pluginDetails) error {
 		if err != nil {
 			return err
 		}
-		details.ExecPath = path.Join(tempPath, "rootfs")
+		details.ExecPath = filepath.Join(tempPath, "rootfs")
 	}
 	commands := make([]string, len(details.Exec))
 	for i, e := range details.Exec {
-		commands[i] = path.Join(details.ExecPath, e)
+		commands[i] = filepath.Join(details.ExecPath, e)
 	}
 	ePlugin, err := plugin.NewExecutablePlugin(r.pluginManager.GenerateArgs(int(log.GetLevel())), commands...)
 	if err != nil {
 		runnerLog.WithFields(log.Fields{
 			"_block": "run-plugin",
-			"path":   commands,
+			"path/filepath":   commands,
 			"error":  err,
 		}).Error("error creating executable plugin")
 		return err
@@ -335,7 +335,7 @@ func (r *runner) runPlugin(name string, details *pluginDetails) error {
 	if err != nil {
 		runnerLog.WithFields(log.Fields{
 			"_block": "run-plugin",
-			"path":   commands,
+			"path/filepath":   commands,
 			"error":  err,
 		}).Error("error starting new plugin")
 		return err

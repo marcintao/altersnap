@@ -25,7 +25,7 @@ import (
 	"crypto/sha256"
 	"io/ioutil"
 	"os"
-	"path"
+	"path/filepath"
 	"testing"
 
 	"github.com/intelsdi-x/snap/plugin/helper"
@@ -36,7 +36,7 @@ var (
 	PluginName    = "snap-plugin-collector-mock1"
 	SnapPath      = helper.BuildPath
 	PluginPath    = helper.PluginFilePath(PluginName)
-	SignatureFile = path.Join(SnapPath, "../pkg/psigning", "snap-plugin-collector-mock1.asc")
+	SignatureFile = filepath.Join(SnapPath, "../pkg/psigning", "snap-plugin-collector-mock1.asc")
 	TempPath      = os.TempDir()
 )
 

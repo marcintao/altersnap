@@ -1,4 +1,5 @@
 // +build legacy
+
 /*
 http://www.apache.org/licenses/LICENSE-2.0.txt
 
@@ -25,7 +26,7 @@ import (
 	"fmt"
 	"math/rand"
 	"net"
-	"path"
+	"path/filepath"
 	"strings"
 	"testing"
 	"time"
@@ -341,7 +342,7 @@ func (l *listenToPluginEvent) HandleGomitEvent(e gomit.Event) {
 }
 
 var (
-	AciPath = path.Join(strings.TrimRight(fixtures.SnapPath, "build"), "pkg/unpackage/")
+	AciPath = filepath.Join(strings.TrimRight(fixtures.SnapPath, "build"), "pkg/unpackage/")
 	AciFile = "snap-collector-plugin-mock1.darwin-x86_64.aci"
 )
 

@@ -24,7 +24,7 @@ package control
 import (
 	"fmt"
 	"net"
-	"path"
+	"path/filepath"
 	"testing"
 
 	"github.com/intelsdi-x/snap/core"
@@ -358,7 +358,7 @@ func TestSubscriptionGroups_ProcessDynamicPositive(t *testing.T) {
 						version:  1,
 						config:   cdata.NewNode(),
 					}
-					_, err := loadPlg(c, path.Join(helper.PluginFilePath("snap-plugin-collector-anothermock1")))
+					_, err := loadPlg(c, filepath.Join(helper.PluginFilePath("snap-plugin-collector-anothermock1")))
 					So(err, ShouldBeNil)
 					<-lpe.load
 					serrs := sg.Process()
@@ -510,7 +510,7 @@ func TestSubscriptionGroups_ProcessSpecifiedDynamicPositive(t *testing.T) {
 						version:  1,
 						config:   cdata.NewNode(),
 					}
-					_, err := loadPlg(c, path.Join(helper.PluginFilePath("snap-plugin-collector-anothermock1")))
+					_, err := loadPlg(c, filepath.Join(helper.PluginFilePath("snap-plugin-collector-anothermock1")))
 					So(err, ShouldBeNil)
 					<-lpe.load
 					serrs := sg.Process()

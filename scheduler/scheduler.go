@@ -24,7 +24,6 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
-	"path"
 	"path/filepath"
 	"strings"
 	"time"
@@ -138,7 +137,7 @@ func autoDiscoverTasks(taskFiles []os.FileInfo, fullPath string,
 	// Note that the list of files is sorted by name due to ioutil.ReadDir
 	// default behaviour. See go doc ioutil.ReadDir
 	for _, file := range taskFiles {
-		f, err := os.Open(path.Join(fullPath, file.Name()))
+		f, err := os.Open(filepath.Join(fullPath, file.Name()))
 		if err != nil {
 			log.WithFields(log.Fields{
 				"_block":           "autoDiscoverTasks",

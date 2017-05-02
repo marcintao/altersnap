@@ -22,7 +22,7 @@ package helper
 import (
 	"fmt"
 	"os"
-	"path"
+	"path/filepath"
 	"runtime"
 )
 
@@ -50,12 +50,12 @@ func PluginPath() string {
 	} else {
 		arch = runtime.GOARCH
 	}
-
-	fpath := path.Join(BuildPath, runtime.GOOS, arch, "plugins")
+	fpath := filepath.Join(BuildPath, runtime.GOOS, arch, "plugins")
 	return fpath
 }
 
 func PluginFilePath(name string) string {
-	fpath := path.Join(PluginPath(), name)
+	suffix := map[string]string {"windows": ".exe"}[runtime.GOOS]
+	fpath := filepath.Join(PluginPath(), name) + suffix
 	return fpath
 }
